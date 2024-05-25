@@ -1,0 +1,195 @@
+/*font-family: 'Oswald', sans-serif;
+font-family: 'Raleway', sans-serif;*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    color: #555;
+    background-color: #f7f7f7;
+  }
+    
+  ul {
+    list-style: none;
+} 
+a {
+    color:white;
+} 
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+hr {
+    width: 150px;
+    height: 2px;
+    background-color: #2196f3;
+    border: 0;
+    margin: 40px auto;
+  }
+/* ------------------- HEADER ----------------- */
+
+header {
+    background-color: #555;
+    position:fixed;
+    z-index:10;
+    top:0;
+    left:0;
+    width:100%;
+    color:#fff;
+    padding:35px 100px 20px;
+
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+header a {
+    text-decoration: none;
+    color:white;
+    opacity: 0.6;
+    cursor: pointer;
+}
+  
+header a:hover {
+    opacity: 1;
+}
+
+header nav ul {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+header nav li {
+    margin: 0 6px;
+}
+
+header nav li:first-child {
+    margin: 0;
+}
+
+header nav li:last-child {
+    margin: 0;
+}
+
+@media(max-width:1000px) {
+    header {
+        text-align:center;
+        flex-direction:column;
+        padding:20px 50px;
+    }
+
+    header img {
+        width : 75%;
+    }
+
+    header nav {
+        justify-content:space-around;
+    }
+
+    header h2 {
+        margin-bottom: 15px;
+    }
+}
+
+/* ------------------- header-image ----------------- */
+#header-image {
+    background: grey;
+    color:white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    background-image: url('img/header.jpg');
+    background-position: right; /* je veux voir la mer, quitte à manquer les immeubles à gauches */
+    background-repeat: no-repeat;
+    background-size: cover; /* Je ne veux pas d'espace sans images dans mon écran */    
+    /*min-height: 20vh; vh c'est view port height, la taille de l'écran */
+    min-height: 400px
+    
+}
+
+#header-image h1, #header-image h3 {
+    font-size:28px;
+    text-shadow: 2px 2px #000;
+    margin-bottom: 40px;
+}
+
+#header-image h1 {
+    font-size:60px;
+    margin-bottom: 15px;    
+}
+
+
+@media(max-width: 800px) {
+
+    #header-image {
+        min-height: 200px;
+    }
+
+    #header-image h1 {
+        font-size:36px;
+    }
+    #header-image h3 {
+        font-size:18px;
+    }
+
+}
+
+/* ------------------- CHAPTER ----------------- */
+
+div h3.title {
+    color:#131633;
+    text-transform: capitalize;
+    font-size: 32px;
+    margin-bottom: 35px;
+    text-align:center;
+}
+
+#chapter {
+    padding: 10px;
+    background-color: #f7f7f7;
+    
+}
+
+#two-cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.chapter-img {
+    border: 4px solid #fcfcfc;
+    background-color: #fcfcfc;
+  }
+  
+  .chapter-bio {
+    width: 65%;
+    max-width: 800px;
+    line-height: 2;
+    margin-left: 20px;
+  }
+
+  @media(max-width:600px) {
+    #chapter, #two-cols {
+      flex-direction: column;
+    }
+    .chapter-bio {
+      margin-top: 20px;
+      line-height: 1.5;
+      text-align: left;
+    }
+  }
+
