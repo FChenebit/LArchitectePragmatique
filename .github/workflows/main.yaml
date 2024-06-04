@@ -1,0 +1,42 @@
+name: CI-LAP
+on:
+  push:
+    branches: ["main"]
+jobs:
+  deploy:
+    name: "Deploy to aws"
+    runs-on: ubuntu-latest
+    env:
+      AWS_INSTANCE_SG_ID: ${{ secrets.AWS_SG_ID }}
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_CLI_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_CLI_SECRET }}
+          aws-region: eu-west-3
+      - name: get runner ip addresses
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: whitelist runner ip address
+        run: |
+          echo '${{ steps.ip.outputs.ipv4 }}/32'
+          aws ec2 authorize-security-group-ingress \
+            --group-id $AWS_INSTANCE_SG_ID \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ./jal-server-key.pem
+          chmod 600 ./jal-server-key.pem
+          ssh -i ./jal-server-key.pem -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST './DeployLap'
+        env:
+          SSH_USER: ${{ secrets.AWS_SSH_USER }}
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
+          SSH_HOST: ${{ secrets.AWS_SSH_HOST }}
+      - name: Remove Github Actions IP from security group
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id $AWS_INSTANCE_SG_ID --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32        
+        if: always()          
