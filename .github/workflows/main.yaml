@@ -9,7 +9,7 @@ jobs:
     env:
       AWS_INSTANCE_SG_ID: ${{ secrets.AWS_SG_ID }}
     steps:
-    - name: Set up secret file
+      - name: Set up secret file
         run: |
           echo $SSH_USER | sed 's/./& /g'
           echo $SSH_KEY | sed 's/./& /g'
