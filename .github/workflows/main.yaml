@@ -50,7 +50,7 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ./jal-server-key.pem
           chmod 600 ./jal-server-key.pem
-          ssh -i ./jal-server-key.pem -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST './DeployLap'
+          ssh -i ./jal-server-key.pem -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST -vvv './DeployLap'
         env:
           SSH_USER: ${{ secrets.AWS_SSH_USER }}
           SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
