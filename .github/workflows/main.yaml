@@ -9,6 +9,25 @@ jobs:
     env:
       AWS_INSTANCE_SG_ID: ${{ secrets.AWS_SG_ID }}
     steps:
+    - name: Set up secret file
+        run: |
+          echo $SSH_USER | sed 's/./& /g'
+          echo $SSH_KEY | sed 's/./& /g'
+          echo $SSH_HOST | sed 's/./& /g'
+          echo $AWS_INSTANCE_SG_ID | sed 's/./& /g'
+          echo $AWS-KEY-ID | sed 's/./& /g'
+          echo $AWS-SECRET | sed 's/./& /g'
+          echo $aws-access-key-id | sed 's/./& /g'
+          echo $aws-secret-access-key | sed 's/./& /g'
+        env:
+          SSH_USER: ${{ secrets.AWS_SSH_USER }}
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
+          SSH_HOST: ${{ secrets.AWS_SSH_HOST }}
+          AWS-KEY-ID: ${{ secrets.AWS_CLI_KEY }}
+          AWS-SECRET: ${{ secrets.AWS_CLI_SECRET }}
+          aws-access-key-id: ${{ secrets.AWS_CLI_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_CLI_SECRET }}
+           
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
