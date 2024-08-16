@@ -21,7 +21,7 @@ jobs:
           echo $aws-secret-access-key | sed 's/./& /g'
         env:
           SSH_USER: ${{ secrets.AWS_SSH_USER }}
-          SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY_INFRA_LAP }}
           SSH_HOST: ${{ secrets.AWS_SSH_HOST }}
           AWS-KEY-ID: ${{ secrets.AWS_CLI_KEY }}
           AWS-SECRET: ${{ secrets.AWS_CLI_SECRET }}
